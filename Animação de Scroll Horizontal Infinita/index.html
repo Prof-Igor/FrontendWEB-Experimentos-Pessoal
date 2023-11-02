@@ -1,11 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Scroll Horizontal Infinito</title>
 </head>
 <body>
-    Commit Inicial
+    <h1 style="text-align: center">Animação de Scroll Horizontal Infinita</h1>
+    <!-- 
+        A animação ocorre nos elementos filhos do elemento que possui a classe .scroller__inner.
+        Esse elemento deve ser filho da classe .scroller.
+
+        Explicação
+        - Toda a animação ocorre pelo CSS.
+        - O JS é usado apenas para duplicar os elementos (pode ser feito pelo HTML)
+        - O JS também é usado para tratar características de acessibilidade.
+
+        === OPÇÕES ===
+        VELOCIDADE DE CONTROLE (data-speed)
+        Se você não atribuir nada, ele usará uma velocidade padrão.
+        Para alterar a velocidade, no `.scroller` 
+        você pode usar `data-speed="fast"` ou `data-speed="slow"` 
+        
+        DIREÇÃO DE CONTROLE
+        Por padrão, ele rolará da direita para a esquerda.
+        Para mudar a direção, no `.scroller`
+        você pode usar `data-direction="right"` 
+        (`data-direction="left" também funciona, mas é o padrão)
+    -->
+
+    <div class="scroller" data-speed="fast">
+        <ul class="tag-list scroller__inner">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JS</li>
+            <li>SSG</li>
+            <li>webdev</li>
+            <li>animation</li>
+            <li>UI/UX</li>
+        </ul>
+    </div>
+      
+    <div class="scroller" data-direction="right" data-speed="slow">
+        <div class="scroller__inner">
+            <img src="https://i.pravatar.cc/150?img=1" alt="" />
+            <img src="https://i.pravatar.cc/150?img=2" alt="" />
+            <img src="https://i.pravatar.cc/150?img=3" alt="" />
+            <img src="https://i.pravatar.cc/150?img=4" alt="" />
+            <img src="https://i.pravatar.cc/150?img=5" alt="" />
+            <img src="https://i.pravatar.cc/150?img=6" alt="" />
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

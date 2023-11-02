@@ -1,0 +1,146 @@
+/* Define o tamanho do scroller na tela (tamanho horizontalmente) */
+.scroller {
+    max-width: 600px;
+}
+
+/* 
+    Classe para os itens do scroll
+*/
+.scroller__inner {
+    padding-block: 1rem; /* "padding-block: 1rem;" define um preenchimento vertical (acima e abaixo). */
+    display: flex;
+    /*     
+        "flex-wrap: wrap;" esta propriedade é usada em conjunto com o "display: flex" 
+        para permitir que os elementos quebrem para a próxima linha quando não couberem mais horizontalmente. 
+    */
+    flex-wrap: wrap;
+    gap: 1rem; /* "gap: 1rem;" define um espaço entre os elementos filhos do elemento.  */
+}
+
+/* 
+    Classes se o scroll tem animação como verdadeiro (data-animated="true")
+*/
+.scroller[data-animated="true"] {
+    overflow: hidden; /* Isso significa que o conteúdo que não cabe dentro do elemento será oculto e não será visível para o usuário. */
+    /* 
+        "-webkit-mask" e "mask" são propriedades usadas para criar uma máscara (mask) no elemento.
+        Uma máscara é um recurso que permite mostrar ou ocultar partes específicas do conteúdo. 
+        Neste caso, está sendo criada uma máscara usando um degradê linear.
+        Ela cria uma máscara usando um degradê linear que é aplicado horizontalmente, 
+        indo de transparente (totalmente oculto) para branco (totalmente visível) e, em seguida, novamente para transparente.
+    */
+    -webkit-mask: linear-gradient(
+        90deg,
+        transparent,
+        white 20%,
+        white 80%,
+        transparent
+    );
+    mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}
+
+.scroller[data-animated="true"] .scroller__inner {
+    /* 
+        Define a largura do elemento .scroller__inner como "max-content".
+        Isso faz com que o elemento tenha uma largura igual à soma das larguras de seus elementos filhos, 
+        permitindo que ele se ajuste automaticamente ao tamanho de seu conteúdo. 
+        Isso é frequentemente usado para criar layouts de rolagem horizontal.
+    */
+    width: max-content;
+    /* 
+        Define que os elementos filhos de .scroller__inner não podem quebrar para a próxima linha. 
+        Isso garante que todos os elementos filhos permaneçam em uma única linha, contribuindo para um layout de rolagem horizontal.
+    */
+    flex-wrap: nowrap;
+    /* 
+        Define uma animação chamada "scroll" para o elemento.
+    */
+    animation: scroll 
+        var(--_animation-duration, 40s) /* Usa uma variável CSS chamada --_animation-duration para definir a duração da animação. Se a variável não estiver definida, o valor padrão de 40 segundos é usado. */
+        var(--_animation-direction, forwards) /* Usa a variável --_animation-direction para definir a direção da animação. O valor padrão é "forwards", que faz com que a animação avance. */
+        linear /* Isso define a interpolação de tempo da animação como linear, o que significa que a animação progride em um ritmo constante. */
+        infinite; /* Isso define que a animação deve continuar repetindo infinitamente. */
+}
+
+/* Variaveis de opções da animação */
+/* Direção */
+.scroller[data-direction="right"] {
+    --_animation-direction: reverse;
+}
+
+.scroller[data-direction="left"] {
+    --_animation-direction: forwards;
+}
+/* Velocidade */
+.scroller[data-speed="fast"] {
+    --_animation-duration: 20s;
+}
+
+.scroller[data-speed="slow"] {
+    --_animation-duration: 60s;
+}
+
+/* Animação */
+@keyframes scroll {
+    to { /* Indica o ponto final da animação. */
+        /* 
+            Esta propriedade transform é usada para aplicar uma transformação ao elemento que está sendo animado. 
+            No caso, a transformação é uma tradução (deslocamento) horizontal.
+            A função translate() é usada para mover um elemento ao longo de um eixo. Neste caso, o elemento está sendo movido horizontalmente.
+            calc(-50% - 0.5rem): A função calc() é usada para realizar cálculos matemáticos em CSS. 
+            Nesse caso, está subtraindo 50% da largura do elemento (-50%) e 0,5 rem (unidade relativa à fonte) do valor calculado. 
+            Isso significa que o elemento será deslocado para a esquerda em metade da sua própria largura, menos 0,5 rem. 
+            Em outras palavras, o elemento será movido para a esquerda.
+        */
+        transform: translate(calc(-50% - 0.5rem));
+    }
+}
+
+/* Estilo geral */
+
+/* Declaração de variáveis CSS usando a pseudo-classe ":root".  */
+:root {
+    --clr-neutral-100: hsl(0, 0%, 100%);
+    --clr-primary-100: hsl(205, 15%, 58%);
+    --clr-primary-400: hsl(215, 25%, 27%);
+    --clr-primary-800: hsl(217, 33%, 17%);
+    --clr-primary-900: hsl(218, 33%, 9%);
+}
+
+/* 
+    "color-scheme: dark;" no elemento html, está indicando ao navegador que 
+    a página da web deve ser renderizada em um esquema de cores escuro. 
+*/
+html {
+    color-scheme: dark;
+}
+
+body {
+    display: grid;
+    min-block-size: 100vh; /* "min-block-size" é uma propriedade de grade que define o tamanho mínimo da coluna ou da linha. */
+    /* 
+        "place-content: center;" é uma propriedade de atalho que combina "align-content" e "justify-content". 
+        Neste caso, "center" centraliza tanto vertical quanto horizontalmente os itens dentro do elemento body.
+    */
+    place-content: center; 
+    font-family: system-ui;
+    font-size: 1.125rem;
+    background-color: var(--clr-primary-800);
+}
+
+/* 
+    Classe para listas
+*/
+.tag-list {
+    margin: 0;
+    padding-inline: 0; /* "padding-inline: 0;" define o preenchimento horizontal (esquerda e direita) desses elementos para zero. */
+    list-style: none; /* "list-style: none;" remove os marcadores padrão de lista (como pontos) dos elementos da lista. */
+}
+
+.tag-list li {
+    padding: 1rem;
+    background: var(--clr-primary-400);
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem -0.25rem var(--clr-primary-900);
+}
+  
